@@ -1,0 +1,28 @@
+*.log
+
+###
+# NetBeans specific
+#
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+###
+# Eclipse
+#
+.project
+.settings
+
+###
+# IntelliJ IDEA (and derivatives such as PyCharm, etc)
+#
+.idea
+*.iml
+
+# coverage
+.coverage
+htmlcov
