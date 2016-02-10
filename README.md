@@ -1,7 +1,7 @@
 sinhro
 ======
 
-TODO
+An simple tool to synchronise files between remote FTP/SFTP folders, and AWS S3.
 
 Checkstyle
 ----------
