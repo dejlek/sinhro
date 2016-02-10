@@ -35,7 +35,7 @@ public final class Main {
     /**
      * Tmp.
      *
-     * @param argCredentials
+     * @param argCredentials An AWSCredentials object.
      */
     public static void tmpFunction(final AWSCredentials argCredentials) {
         AmazonS3Client s3 = new AmazonS3Client(argCredentials);
