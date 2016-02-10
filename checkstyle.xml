@@ -4,6 +4,11 @@
           "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
 <!--
+  Dejan: This file contains the modified SUN coding standards file. Modified
+    values are:
+    - line length changed from 80 to 120
+
+  ############################################################################
 
   Checkstyle configuration that checks the sun coding conventions from:
 
