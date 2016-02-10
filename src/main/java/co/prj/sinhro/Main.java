@@ -19,12 +19,25 @@ import java.util.logging.Logger;
 import org.ini4j.Ini;
 
 /**
+ * Basic entry point class...
  *
  * @author dejan
  */
-public class Main {
+public final class Main {
 
-    public static void tmpFunction(AWSCredentials argCredentials) {
+    /**
+     * Private, dummy constructor.
+     */
+    private Main() {
+        // N/A
+    }
+
+    /**
+     * Tmp.
+     *
+     * @param argCredentials
+     */
+    public static void tmpFunction(final AWSCredentials argCredentials) {
         AmazonS3Client s3 = new AmazonS3Client(argCredentials);
 
         // Test. For example, get object keys for a given bucket.
@@ -39,11 +52,11 @@ public class Main {
     /**
      * AWS session starts with a call to this function.
      *
-     * @param userCredentials
-     * @param argRegion
+     * @param userCredentials A BasicAWSCredentials object.
+     * @param argRegion A String object containing AWS region.
      * @return Credentials object containing session credentials that we are going to use in the application.
      */
-    public static AWSCredentials awsLogin(BasicAWSCredentials userCredentials, String argRegion) {
+    public static AWSCredentials awsLogin(final BasicAWSCredentials userCredentials, final String argRegion) {
         AWSCredentials ret = null;
 
         try {
@@ -91,9 +104,9 @@ public class Main {
     /**
      * Default entry function.
      *
-     * @param args
+     * @param args Program arguments.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         Path path1 = Paths.get("./sinhro.conf");
         Path path2 = Paths.get("~/.config/sinhro.conf".replaceFirst("^~", System.getProperty("user.home")));
         Path configPath = null;
@@ -124,6 +137,6 @@ public class Main {
 
         AWSCredentials cred = awsLogin(bac, region);
         tmpFunction(cred);
-    }
+    } // main() method
 
-}
+} // Main class
