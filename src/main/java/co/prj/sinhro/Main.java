@@ -39,6 +39,8 @@ public class Main {
     /**
      * AWS session starts with a call to this function.
      *
+     * @param userCredentials
+     * @param argRegion
      * @return Credentials object containing session credentials that we are going to use in the application.
      */
     public static AWSCredentials awsLogin(BasicAWSCredentials userCredentials, String argRegion) {
@@ -72,9 +74,9 @@ public class Main {
             // Package the session credentials as a BasicSessionCredentials
             // object for an S3 client object to use.
             BasicSessionCredentials basicSessionCredentials =
-             new BasicSessionCredentials(sessionCredentials.getAccessKeyId(),
-        		                         sessionCredentials.getSecretAccessKey(),
-        		                         sessionCredentials.getSessionToken());
+                    new BasicSessionCredentials(sessionCredentials.getAccessKeyId(),
+                            sessionCredentials.getSecretAccessKey(),
+                            sessionCredentials.getSessionToken());
 
             ret = basicSessionCredentials;
         } catch (Exception ex) {
@@ -86,6 +88,11 @@ public class Main {
         return ret;
     } // awsLogin() method
 
+    /**
+     * Default entry function.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Path path1 = Paths.get("./sinhro.conf");
         Path path2 = Paths.get("~/.config/sinhro.conf".replaceFirst("^~", System.getProperty("user.home")));
