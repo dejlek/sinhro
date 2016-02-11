@@ -1,5 +1,16 @@
 package co.prj.sinhro;
 
+// Java API
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+// 3rd party modules
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.BasicSessionCredentials;
@@ -9,14 +20,13 @@ import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
 import com.amazonaws.services.securitytoken.model.Credentials;
 import com.amazonaws.services.securitytoken.model.GetSessionTokenRequest;
 import com.amazonaws.services.securitytoken.model.GetSessionTokenResult;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.ini4j.Ini;
+
+// Our modules
+import co.prj.sinhro.clicmd.CLICommand;
+import co.prj.sinhro.clicmd.HelpCommand;
+import co.prj.sinhro.clicmd.ListCommand;
+import co.prj.sinhro.clicmd.SyncCommand;
 
 /**
  * Basic entry point class...
@@ -110,6 +120,11 @@ public final class Main {
         Path path1 = Paths.get("./sinhro.conf");
         Path path2 = Paths.get("~/.config/sinhro.conf".replaceFirst("^~", System.getProperty("user.home")));
         Path configPath = null;
+        App app = new App(); // Application states.
+        List<CLICommand> commands = new ArrayList<>();
+        commands.add(new HelpCommand(commands));
+        commands.add(new ListCommand());
+        commands.add(new SyncCommand());
 
         if (Files.exists(path1)) {
           configPath = path1;
@@ -128,14 +143,20 @@ public final class Main {
         try {
             ini = new Ini(configPath.toFile());
             String keyID = ini.get("default", "aws_access_key_id");
+            app.set(keyID, "default", "aws_access_key_id");
             String accessKey = ini.get("default", "aws_secret_access_key");
+            app.set(accessKey, "default", "aws_secret_access_key");
             region = ini.get("default", "region");
+            app.set(region, "default", "region");
             bac = new BasicAWSCredentials(keyID, accessKey);
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         AWSCredentials cred = awsLogin(bac, region);
+
+        // We will put the temporary credentials object into the App's config map.
+        app.set("default", cred);
         tmpFunction(cred);
     } // main() method
 
