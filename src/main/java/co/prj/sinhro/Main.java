@@ -112,6 +112,26 @@ public final class Main {
     } // awsLogin() method
 
     /**
+     * Analyse the program arguments, and handle them using appropriate CLICommand object.
+     *
+     * @param argApp App object
+     * @param args Program arguments
+     */
+    public static void parseAndRunCommand(final App argApp, final String[] args) {
+        List<CLICommand> commands = new ArrayList<>();
+        commands.add(new HelpCommand(argApp));
+        commands.add(new ListCommand(argApp));
+        commands.add(new SyncCommand(argApp));
+        argApp.setCommands(commands);
+
+        for (CLICommand cmd : commands) {
+            if (cmd.getCommand().equals(args[0])) {
+                cmd.handle(args);
+            }
+        }
+    }
+
+    /**
      * Default entry function.
      *
      * @param args Program arguments.
@@ -121,10 +141,6 @@ public final class Main {
         Path path2 = Paths.get("~/.config/sinhro.conf".replaceFirst("^~", System.getProperty("user.home")));
         Path configPath = null;
         App app = new App(); // Application states.
-        List<CLICommand> commands = new ArrayList<>();
-        commands.add(new HelpCommand(commands));
-        commands.add(new ListCommand());
-        commands.add(new SyncCommand());
 
         if (Files.exists(path1)) {
           configPath = path1;
@@ -152,6 +168,8 @@ public final class Main {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        parseAndRunCommand(app, args);
 
         AWSCredentials cred = awsLogin(bac, region);
 

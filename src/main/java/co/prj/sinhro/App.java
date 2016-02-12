@@ -1,5 +1,7 @@
 package co.prj.sinhro;
 
+import co.prj.sinhro.clicmd.CLICommand;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -12,6 +14,11 @@ public final class App {
      * Here we store application configuration (from the Ini file).
      */
     private final HashMap<String, Object> config;
+
+    /**
+     * Here we keep all our CLICommand objects.
+     */
+    private Collection<CLICommand> commands;
 
     /**
      * Default constructor.
@@ -62,6 +69,24 @@ public final class App {
      */
     public Object get(final String argKey) {
         return config.get(argKey);
+    }
+
+    /**
+     * Returns a collection of CLICommand objects.
+     *
+     * @return Collection<CLICommand> object with all the commands in it.
+     */
+    public Collection<CLICommand> getCommands() {
+        return commands;
+    }
+
+    /**
+     * Use this method to set the Collection<CLICommand> commands collection.
+     *
+     * @param argCommands Collection<CLICommand> object.
+     */
+    public void setCommands(final Collection<CLICommand> argCommands) {
+        commands = argCommands;
     }
 
 } // App class

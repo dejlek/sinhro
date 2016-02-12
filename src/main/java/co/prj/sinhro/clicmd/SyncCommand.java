@@ -1,19 +1,30 @@
 package co.prj.sinhro.clicmd;
 
+import co.prj.sinhro.App;
+
 /**
  *
  * @author dejan
  */
-public final class SyncCommand implements CLICommand {
+public final class SyncCommand extends BaseCommand {
+
+    /**
+     * Basic constructor to take App object.
+     *
+     * @param argApp App object.
+     */
+    public SyncCommand(final App argApp) {
+        super(argApp);
+    }
 
     @Override
     public String getCommand() {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return "sync";
     }
 
     @Override
     public String getDescription() {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return "Synchronises <source> and <destination> locations.";
     }
 
     @Override

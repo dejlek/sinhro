@@ -1,10 +1,21 @@
 package co.prj.sinhro.clicmd;
 
+import co.prj.sinhro.App;
+
 /**
  *
  * @author dejan
  */
-public final class ListCommand implements CLICommand {
+public final class ListCommand extends BaseCommand {
+
+    /**
+     * Basic constructor to take App object.
+     *
+     * @param argApp App object.
+     */
+    public ListCommand(final App argApp) {
+        super(argApp);
+    }
 
     @Override
     public String getCommand() {
@@ -17,8 +28,8 @@ public final class ListCommand implements CLICommand {
     }
 
     @Override
-    public void handle(String... argArguments) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+    public void handle(final String... argArguments) {
+        System.out.println("LIST = TODO!");
     }
 
     @Override
@@ -28,6 +39,5 @@ public final class ListCommand implements CLICommand {
         System.out.println("  Lists all sources and destinations configured in the config file "
                 + "(~/.config/sinhro.conf).");
     }
-
 
 }
