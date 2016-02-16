@@ -1,6 +1,10 @@
 package co.prj.sinhro.clicmd;
 
 import co.prj.sinhro.App;
+import java.util.Map;
+import java.util.Set;
+import org.ini4j.Ini;
+import org.ini4j.Profile.Section;
 
 /**
  *
@@ -30,6 +34,17 @@ public final class ListCommand extends BaseCommand {
     @Override
     public void handle(final String... argArguments) {
         System.out.println("LIST = TODO!");
+        Ini ini = app.getIni();
+        Set<Map.Entry<String, Section>> sectionSet = ini.entrySet();
+        for (Map.Entry<String, Section> entry : sectionSet) {
+            String name = entry.getKey();
+            if (name.startsWith("loc.")) {
+                name = name.replace("loc.", "");
+                String type = entry.getValue().get("type");
+                String desc = entry.getValue().get("desc");
+                System.out.println(name + " (" + type + ") - " + desc);
+            }
+        }
     }
 
     @Override
@@ -40,4 +55,4 @@ public final class ListCommand extends BaseCommand {
                 + "(~/.config/sinhro.conf).");
     }
 
-}
+} // ListCommand class

@@ -3,6 +3,7 @@ package co.prj.sinhro;
 import co.prj.sinhro.clicmd.CLICommand;
 import java.util.Collection;
 import java.util.HashMap;
+import org.ini4j.Ini;
 
 /**
  * A class to hold (global) application state.
@@ -19,6 +20,11 @@ public final class App {
      * Here we keep all our CLICommand objects.
      */
     private Collection<CLICommand> commands;
+
+    /**
+     * INI file configuration (parsed sinhro.conf file).
+     */
+    private Ini ini;
 
     /**
      * Default constructor.
@@ -87,6 +93,24 @@ public final class App {
      */
     public void setCommands(final Collection<CLICommand> argCommands) {
         commands = argCommands;
+    }
+
+    /**
+     * Use this method to obtained parsed INI file data.
+     *
+     * @return Ini object.
+     */
+    public Ini getIni() {
+        return ini;
+    }
+
+    /**
+     * Use this method to set the parsed INI data.
+     *
+     * @param argIni Ini object.
+     */
+    public void setIni(final Ini argIni) {
+        ini = argIni;
     }
 
 } // App class

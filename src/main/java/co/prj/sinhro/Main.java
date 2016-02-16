@@ -163,6 +163,8 @@ public final class Main {
         String region = "us-east-1";
         try {
             ini = new Ini(configPath.toFile());
+            ini.load();
+            app.setIni(ini);
             String keyID = ini.get("default", "aws_access_key_id");
             app.set(keyID, "default", "aws_access_key_id");
             String accessKey = ini.get("default", "aws_secret_access_key");
