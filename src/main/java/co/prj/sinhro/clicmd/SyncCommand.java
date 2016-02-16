@@ -34,7 +34,9 @@ public final class SyncCommand extends BaseCommand {
 
     @Override
     public void showHelp() {
-        System.out.println("sync help (TODO)");
+        System.out.println("<sinhro> sync <location1> <location2>");
+        System.out.println("");
+        System.out.println("  Copies all new files from <location1> to <location2>.");
     }
 
 } // SyncCommand class
