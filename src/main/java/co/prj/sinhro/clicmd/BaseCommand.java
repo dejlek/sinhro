@@ -20,5 +20,5 @@ public abstract class BaseCommand implements CLICommand {
     public BaseCommand(final App argApp) {
         app = argApp;
     }
-
+    
 } // BaseCommand class (abstract)
